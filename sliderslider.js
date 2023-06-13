@@ -9,15 +9,6 @@ arr.push('./img/photo 1.jpg');
 arr.push('./img/photo 2.jpg');
 arr.push('./img/photo 3.jpg'); 
 
-aboutSlide.forEach((text, index) => {
-    text.setAttribute('data-index', index);
-    text.classList.add(`n${index}`);
-})
-
-function moveAbout(num){
-    document.querySelector('.active-about').classList.remove('active-about');
-    document.querySelector(`.n${num}`).classList.add('active-about');
-}
 
 dots[0].classList.add('dotActive')
 
@@ -78,9 +69,14 @@ function initOurSlider(){
     city.forEach((cityName, index) => {
         cityName.addEventListener('click', () => {
           moveSlider(index);
-          moveAbout(index);
         });
       });  
+
+      dots.forEach((dotdot, index) => {
+        dotdot.addEventListener('click', () => {
+          moveSlider(index);
+        });
+      }); 
 
     function moveSlider(num) {
         let activeSlide = sliderImg.querySelector(".active");
@@ -88,24 +84,16 @@ function initOurSlider(){
             activeSlide.classList.remove("active");
             }
         sliderImg.querySelector(".num" + num).classList.add("active");
-      
+        
         dots.forEach((dot, index) => {
             if (index === num) {
                 dot.classList.add("dotActive");
             } else {
                 dot.classList.remove("dotActive");
             } 
-
-        aboutSlide.forEach((text, index)=>{
-            if (index === num){
-                text.classList.add('active-about')
-            } else {
-                text.classList.remove('active-about');
-            } 
-        })
     })
 
-    city.forEach((menu, index) => {
+       city.forEach((menu, index) => {
         if (index === num) {
             menu.classList.add("active-menu");
         } else {
